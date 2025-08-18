@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Aasasdayut Perdpraw – Resume</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ===== Base ===== */
+    :root{
+      --bg:#0f1722; --surface:#111827; --muted:#9aa4b2; --text:#e6edf3;
+      --accent:#38bdf8; --border:rgba(255,255,255,.08); --ring:rgba(56,189,248,.35);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0; font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial; color:var(--text); background:var(--bg)}
+    a{color:inherit; text-decoration:none}
+
+    /* ===== Navbar ===== */
+    .nav{position:sticky; top:0; z-index:50; backdrop-filter:saturate(180%) blur(12px);
+      background:linear-gradient(180deg, rgba(15,23,34,.9), rgba(15,23,34,.55)); border-bottom:1px solid var(--border)}
+    .nav-inner{max-width:1100px; margin:auto; display:flex; align-items:center; justify-content:space-between; padding:14px 20px}
+    .brand{display:flex; align-items:center; gap:10px; font-weight:700}
+    .brand .dot{width:10px; height:10px; border-radius:999px; background:var(--accent); box-shadow:0 0 24px var(--accent)}
+    .links{display:flex; gap:16px}
+    .links a{padding:8px 10px; border-radius:10px; color:var(--muted); font-weight:600}
+    .links a.active, .links a:hover{color:var(--text); background:rgba(56,189,248,.12)}
+    .menu-btn{display:none; border:1px solid var(--border); background:transparent; color:var(--text); padding:8px 10px; border-radius:10px}
+    /* hide mobile drawer by default on desktop */
+    .drawer{display:none}
+    @media (max-width:860px){ .links{display:none} .menu-btn{display:block} .drawer{display:none; position:fixed; inset:60px 16px auto 16px; background:var(--surface); border:1px solid var(--border); border-radius:14px}
+      .drawer a{display:block; padding:14px 16px; color:var(--muted); border-bottom:1px solid var(--border)} .drawer a:last-child{border-bottom:none} .drawer a:hover{color:var(--text); background:rgba(56,189,248,.1)} }
+
+    /* ===== Layout ===== */
+    .container{max-width:1100px; margin:auto; padding:0 20px}
+    section{scroll-margin-top:90px}
+    .card{background:#111827; border:1px solid var(--border); border-radius:16px; padding:22px; box-shadow:0 10px 30px rgba(0,0,0,.35)}
+    .grid{display:grid; grid-template-columns:320px 1fr; gap:26px}
+    @media (max-width:980px){ .grid{grid-template-columns:1fr} }
+
+    h1{font-size:40px; margin:8px 0 6px}
+    h2{font-size:24px; margin:0 0 12px}
+    h3{font-size:18px; margin:0 0 6px}
+    p, li{color:var(--muted); line-height:1.7}
+    ul{padding-left:18px; margin:10px 0}
+    strong{color: #fff}
+
+    .stack{display:flex; flex-wrap:wrap; gap:10px}
+    .tag{border:1px solid var(--border); padding:6px 10px; border-radius:999px; background:rgba(56,189,248,.08); color:#cfe8ff}
+    .muted{color:var(--muted)}
+
+    .avatar{width:100%; border-radius:14px; border:1px solid var(--border)}
+    .contact a{display:flex; align-items:center; gap:8px; color:var(--muted); padding:8px 10px; border:1px solid var(--border); border-radius:10px; margin-right:10px; margin-bottom:10px; width:max-content}
+    .contact a:hover{color:var(--text); background:rgba(56,189,248,.08)}
+
+    .two-col{display:grid; grid-template-columns:1fr 1fr; gap:18px}
+    @media (max-width:720px){ .two-col{grid-template-columns:1fr} }
+
+    .footer{padding:40px 0 70px; text-align:center; color:var(--muted)}
+    .lang-skill {
+      margin-bottom: 10px;
+    }
+
+    .lang-skill span {
+      font-weight: 500;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .bar {
+      width: 30%;
+      height: 18px;
+      background: #eee;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .fill {
+      height: 100%;
+      background: #3b82f6;
+      color: #fff;
+      font-size: 0.8rem;
+      text-align: right;
+      padding-right: 5px;
+      line-height: 18px;
+      border-radius: 10px 0 0 10px;
+      transition: width 0.5s ease-in-out;
+    }
+    .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 คอลัมน์ต่อแถว */
+    gap: 30px;
+    justify-items: center;
+  }
+
+  .skill-circle {
+    --percent: 0;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: conic-gradient(#3b82f6 calc(var(--percent) * 1%), #8a8a8a 0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: #fff;
+    position: relative;
+  }
+
+  .skill-circle::before {
+    content: attr(data-label);
+    position: absolute;
+    bottom: -25px;
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+
+  .skill-circle::after {
+    content: attr(data-percent) '%';
+    position: absolute;
+    font-size: 0.85rem;
+    font-weight: bold;
+  }
+  
+  </style>
+</head>
+<body>
+
+  <nav class="nav" aria-label="Primary">
+    <div class="nav-inner">
+      <div class="brand"><span class="dot"></span> <span>AASASDAYUT RESUME</span></div>
+      <div class="links" id="navLinks">
+        <a href="#about">About</a>
+        <a href="#education">Education</a>
+        <a href="#skills">Skills</a>
+        <a href="#experience">Experience</a>
+        <a href="#certificates">Certificates</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <button class="menu-btn" id="menuBtn" aria-label="Toggle menu">☰</button>
+    </div>
+    <div class="drawer" id="drawer">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#experience">Relevant Experience</a>
+      <a href="#education">Education</a>
+      <a href="#certificates">Certificates</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <main class="container">
+    <section id="about" style="padding:28px 0 12px">
+      <div class="card grid">
+          <img src="/img/01.jpg" alt="Profile Photo" class="avatar" />
+        <div>
+          <div class="stack" style="margin-bottom:8px">
+            <span class="tag">Software Developer</span>
+          </div>
+          <h1>Aasasdayut Perdpraw</h1>
+          <p>A motivated 4th-year Computer Science student seeking a software developer internship. Proficient in HTML5, CSS, JavaScript, PHP, Python, Laravel, and Node.js with Express.js. Experienced in SQL and database management using phpMyAdmin. 
+            Familiar with GitHub, Trello, and Figma. Strong problem-solving skills, able to work collaboratively, and eager to continuously learn new technologies to enhance skills and contribute to high-quality software development.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="education" style="padding:18px 0">
+      <div class="card">
+        <h2>Education</h2>
+        <p><strong>Sakolrajwittayanukul</strong> — Grade 10–12 (2018–2022)</p>
+        <p><strong>Kasetsart University, Chalermprakiat Sakon Nakhon Province Campus</strong> — Computer Science (2022–2026) – Graduated in 2026</p>
+      </div>
+    </section>
+
+    <section id="skills" style="padding:18px 0">
+      <div class="card">
+        <h2>Skills</h2>
+        <div class="skills-grid">
+            <div class="skill-circle" data-label="Python" data-percent="60"></div>
+            <div class="skill-circle" data-label="PHP" data-percent="70"></div>
+            <div class="skill-circle" data-label="Laravel" data-percent="70"></div>
+            <div class="skill-circle" data-label="JavaScript" data-percent="60"></div>
+          </div><br><br>
+        <div class="two-col">
+          <ul>
+            <li><strong>Programming Languages:</strong> JavaScript, Python, PHP, HTML, C</li>
+            <li><strong>Frontend:</strong> CSS, React, Angular, Vue.js</li>
+          </ul>
+          <ul>
+            <li><strong>Backend:</strong> Laravel, Express.js</li>
+            <li><strong>Database & Management:</strong> MySQL, MariaDB</li>
+            <li><strong>Tools:</strong> GitHub, Figma, Trello, Xampp, Wamp</li>
+          </ul>
+        </div>
+        <div>
+          <h2>Language</h2>
+          <div class="lang-skill">
+            <span>Thai : Native</span>
+              <div class="bar">
+                <div class="fill" style="width: 100%;"></div>
+              </div>
+          </div>
+          <div class="lang-skill">
+            <span>English : Basic</span>
+              <div class="bar">
+                <div class="fill" style="width: 40%;"></div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience" style="padding:18px 0">
+      <div class="card">
+        <h2>Relevant Experience</h2>
+        <div style="padding:6px 0">
+          <h3>Mini Project: Booth Booking System for Kaset Fair</h3>
+          <ul>
+            <li>Developed a web application for booth booking using Angular as a mini project for final submission.</li>
+            <li>Created an API to fetch data from a MySQL database for real-time booth availability.</li>
+            <li>Worked on both the front-end and back-end to ensure smooth integration between UI and database.</li>
+          </ul>
+        </div>
+        <div style="padding:6px 0">
+          <h3>Thesis Project: Mobile Phone Info Website</h3>
+          <ul>
+            <li>Developed a responsive mobile phone information website using HTML, CSS, JavaScript, React, and Laravel. Implemented search, filtering, and comparison features; 
+              managed news and advertisements; built member and admin systems; and deployed the application on a live server</li>
+          </ul>
+        </div>
+        <div style="padding:6px 0">
+          <h3>Tour Company Management Website Development</h3>
+          <ul>
+            <li>Built a management system (Laravel + MySQL) with separate Frontend/API; optimized database design and admin back office for efficient operations.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="certificates" style="padding:18px 0">
+      <div class="card">
+        <h2>Certificates</h2>
+        <ul>
+          <li><strong>Fundamentals of the C Programming Language I — ThaiMOOC (KMUTT), 2020</strong>. Completed core C concepts: variables, control structures, functions, arrays.</li>
+          <li><strong>Python Qualifying Examination — CIS2023, Kasetsart University (CPSC)</strong>. Passed departmental exam on Python fundamentals.</li>
+          <li><strong>SQL Qualifying Examination — CIS2024, Kasetsart University (CPSC)</strong>. Passed departmental exam on SQL queries & database management.</li>
+        </ul>
+      </div>
+    </section>
+    
+      <section id="contact" style="padding:18px 0 6px ">
+        <div class="card">
+          <h2>Contact</h2><span class="muted">You can contact me via:</span>
+            <div style="margin-top:18px">
+              <div class="contact">
+                <a href="mailto:aasasdayut.p@ku.th">📧 aasasdayut.p@ku.th</a>
+                <a href="tel:098-8658585">📱 098-8658585</a>
+              </div>
+              <p class="muted" style="margin-top:8px">📍 Sakon Nakhon, Thailand</p>
+              
+            </div>
+        </div>
+      </section>
+    <div class="footer">© <span id="year"></span> Aasasdayut Perdpraw</div>
+  </main>
+
+  <script>
+    // Highlight nav while scrolling
+    const sections = Array.from(document.querySelectorAll('section'));
+    const links = Array.from(document.querySelectorAll('.links a'));
+    const drawerLinks = Array.from(document.querySelectorAll('#drawer a'));
+    const setActive = (id) => { [...links, ...drawerLinks].forEach(a=>a.classList.toggle('active', a.getAttribute('href')===`#${id}`)); };
+    let ioLockedUntil = 0;
+    const ro = new IntersectionObserver((entries)=>{
+      if (Date.now() < ioLockedUntil) return;
+      const visible = entries.filter(e => e.isIntersecting);
+      if (visible.length) {
+        visible.sort((a,b)=> b.intersectionRatio - a.intersectionRatio);
+        setActive(visible[0].target.id);
+      }
+    }, { rootMargin: '-45% 0px -55% 0px', threshold: [0, 0.25, 0.5, 0.75, 1] });
+    sections.forEach(s=>ro.observe(s));
+
+    // Mobile 
+    const btn = document.getElementById('menuBtn');
+    const drawer = document.getElementById('drawer');
+    btn?.addEventListener('click', ()=>{ drawer.style.display = (drawer.style.display==='block') ? 'none' : 'block'; });
+    drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click', ()=>{ drawer.style.display='none'; }));
+
+    // Smooth-scroll 
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', (e)=>{
+        const id = a.getAttribute('href').substring(1);
+        const el = document.getElementById(id);
+        if(el){ e.preventDefault(); const navH=(document.querySelector('.nav')?.offsetHeight||70); const top=el.getBoundingClientRect().top + window.pageYOffset - navH - 8; ioLockedUntil=Date.now()+800; setActive(id); window.scrollTo({ top, behavior:'smooth' }); }
+      });
+    });
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+    
+    document.querySelectorAll(".skill-circle").forEach(el => {
+        const percent = el.getAttribute("data-percent");
+        el.style.setProperty("--percent", percent);
+    });
+
+  </script>
+</body>
+</html>
