@@ -315,7 +315,7 @@
           <h2>Contact</h2><span class="muted">You can contact me via:</span>
             <div style="margin-top:18px">
               <div class="contact">
-                <a href="mailto:aasasdayut.p@ku.th">📧 aasasdayut.p@ku.th</a>
+                <a id="emailLink" href="mailto:aasasdayut.p@ku.th"  >📧 aasasdayut.p@ku.th</a>
                 <a href="tel:098-8658585">📱 098-8658585</a>
               </div>
               <p class="muted" style="margin-top:8px">📍 Sakon Nakhon, Thailand</p>
@@ -380,7 +380,25 @@
         scrollBtn.addEventListener("click", () => {
           window.scrollTo({ top: 0, behavior: "smooth" });
         });
-      });
+    });
+  
+    document.addEventListener("DOMContentLoaded", () => {
+        const email = "aasasdayut.p@ku.th";
+        const link  = document.getElementById("emailLink");
+
+        // โทสับ/แท็บเล็ตให้ใช้ mailtoเหมือนเดิม, เดสก์ท็อปเปิด Gmail Web
+        const ua = navigator.userAgent.toLowerCase();
+        const isMobileOrTablet = /android|iphone|ipad|ipod|mobile|tablet/i.test(ua);
+
+        if (isMobileOrTablet) {
+          link.href = `mailto:${email}`;
+          link.removeAttribute("target");
+        } else {
+          link.href  = `https://mail.google.com/mail/?view=cm&tf=1&to=${email}`;
+          link.target = "_blank";
+          link.rel    = "noopener";
+        }
+    });
 
   </script>
 
