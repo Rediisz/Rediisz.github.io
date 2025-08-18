@@ -389,8 +389,10 @@
         // โทสับ/แท็บเล็ตให้ใช้ mailtoเหมือนเดิม, เดสก์ท็อปเปิด Gmail Web
         const ua = navigator.userAgent.toLowerCase();
         const isMobileOrTablet = /android|iphone|ipad|ipod|mobile|tablet/i.test(ua);
+        const isIpad = /ipad/i.test(ua) || 
+                 (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
 
-        if (isMobileOrTablet) {
+        if (isMobileOrTablet|| isIpad) {
           link.href = `mailto:${email}`;
           link.removeAttribute("target");
         } else {
@@ -404,3 +406,4 @@
 
 </body>
 </html>
+
