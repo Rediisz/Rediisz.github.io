@@ -143,7 +143,7 @@
       justify-content: center;
       cursor: pointer;
 
-      /* make it fade */
+      /* make เลื่อนbutton fade */
       opacity: 0;
       visibility: hidden;
       transition: opacity 0.4s ease, visibility 0.4s ease;
@@ -184,6 +184,39 @@
         visibility: visible;
       }
     }
+    /* ซ่อนแล้วค่อยเฟด*/
+    .reveal{
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity .6s ease, transform .6s ease;
+      will-change: opacity, transform;
+    }
+    
+    .reveal[data-anim="left"]  { transform: translateX(-28px); }
+    .reveal[data-anim="right"] { transform: translateX( 28px); }
+    
+    .reveal.is-visible{
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ไล่กันทีละชิ้น stagger ให้รายการด้านใน */
+    .stagger > *{
+      opacity: 0; transform: translateY(14px);
+      transition: opacity .5s ease, transform .5s ease;
+    }
+    .stagger.in-view > *{ opacity: 1; transform:none; }
+    .stagger.in-view > *:nth-child(1){ transition-delay: .05s; }
+    .stagger.in-view > *:nth-child(2){ transition-delay: .10s; }
+    .stagger.in-view > *:nth-child(3){ transition-delay: .15s; }
+    .stagger.in-view > *:nth-child(4){ transition-delay: .20s; }
+    .stagger.in-view > *:nth-child(5){ transition-delay: .25s; }
+
+    /* ไม่ต้องการแอนิเมชัน */
+    @media (prefers-reduced-motion: reduce){
+      .reveal, .stagger > *{ transition:none !important; transform:none !important; opacity:1 !important; }
+    }
+
   </style>
 </head>
 <body>
@@ -212,120 +245,124 @@
   </nav>
 
   <main class="container">
-    <section id="about" style="padding:28px 0 12px">
-      <div class="card grid">
-          <img src="/img/01.jpg" alt="Profile Photo" class="avatar" />
-        <div>
-          <div class="stack" style="margin-bottom:8px">
-            <span class="tag">Software Developer</span>
-          </div>
-          <h1>Aasasdayut Perdpraw</h1>
-          <p>A motivated 4th-year Computer Science student seeking a software developer or web developer internship. Proficient in HTML5, CSS, JavaScript, PHP, Python, Laravel, and Node.js with Express.js. Experienced in SQL and database management using phpMyAdmin. 
-            Familiar with GitHub, Trello, and Figma. Strong problem-solving skills, able to work collaboratively, and eager to continuously learn new technologies to enhance skills and contribute to high-quality software development.</p>
+  <section id="about" style="padding:28px 0 12px">
+    <div class="card grid reveal">
+        <img src="/img/01.jpg" alt="Profile Photo" class="avatar reveal" data-anim="left" />
+      <div class="reveal" data-anim="right">
+        <div class="stack" style="margin-bottom:8px">
+          <span class="tag">Software Developer</span>
+          <span class="tag">Web Developer</span>
         </div>
+        <h1 class="reveal">Aasasdayut Perdpraw</h1>
+        <p class="reveal">A motivated 4th-year Computer Science student seeking a software developer or web developer internship. Proficient in HTML5, CSS, JavaScript, PHP, Python, Laravel, and Node.js with Express.js. Experienced in SQL and database management using phpMyAdmin. 
+          Familiar with GitHub, Trello, and Figma. Strong problem-solving skills, able to work collaboratively, and eager to continuously learn new technologies to enhance skills and contribute to high-quality software development.</p>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section id="education" style="padding:18px 0">
-      <div class="card">
-        <h2>Education</h2>
+  <section id="education" style="padding:18px 0">
+    <div class="card reveal">
+      <h2 class="reveal">Education</h2>
+      <div class="stagger">
         <p><strong>Sakolrajwittayanukul</strong> — Grade 10–12 (2018–2022)</p>
         <p><strong>Kasetsart University, Chalermprakiat Sakon Nakhon Province Campus</strong> — Computer Science (2022–2026) – Graduated in 2026</p>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section id="skills" style="padding:18px 0">
-      <div class="card">
-        <h2>Skills</h2>
-        <div class="skills-grid">
-            <div class="skill-circle" data-label="Python" data-percent="60"></div>
-            <div class="skill-circle" data-label="PHP" data-percent="70"></div>
-            <div class="skill-circle" data-label="Laravel" data-percent="70"></div>
-            <div class="skill-circle" data-label="JavaScript" data-percent="60"></div>
-          </div><br><br>
-        <div class="two-col">
-          <ul>
-            <li><strong>Programming Languages:</strong> JavaScript, Python, PHP, HTML, C</li>
-            <li><strong>Frontend:</strong> CSS, React, Angular, Vue.js</li>
-          </ul>
-          <ul>
-            <li><strong>Backend:</strong> Laravel, Express.js</li>
-            <li><strong>Database & Management:</strong> MySQL, MariaDB</li>
-            <li><strong>Tools:</strong> GitHub, Figma, Trello, Xampp, Wamp</li>
-          </ul>
-        </div>
-        <div>
-          <h2>Language</h2>
-          <div class="lang-skill">
-            <span>Thai : Native</span>
-              <div class="bar">
-                <div class="fill" style="width: 100%;"></div>
-              </div>
-          </div>
-          <div class="lang-skill">
-            <span>English : Basic</span>
-              <div class="bar">
-                <div class="fill" style="width: 40%;"></div>
-              </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="experience" style="padding:18px 0">
-      <div class="card">
-        <h2>Relevant Experience</h2>
-        <div style="padding:6px 0">
-          <h3>Mini Project: Booth Booking System for Kaset Fair</h3>
-          <ul>
-            <li>Developed a web application for booth booking using Angular as a mini project for final submission.</li>
-            <li>Created an API to fetch data from a MySQL database for real-time booth availability.</li>
-            <li>Worked on both the front-end and back-end to ensure smooth integration between UI and database.</li>
-          </ul>
-        </div>
-        <div style="padding:6px 0">
-          <h3>Thesis Project: Mobile Phone Info Website</h3>
-          <ul>
-            <li>Developed a responsive mobile phone information website using HTML, CSS, JavaScript, React, and Laravel. Implemented search, filtering, and comparison features; 
-              managed news and advertisements; built member and admin systems; and deployed the application on a live server</li>
-          </ul>
-        </div>
-        <div style="padding:6px 0">
-          <h3>Tour Company Management Website Development</h3>
-          <ul>
-            <li>Built a management system (Laravel + MySQL) with separate Frontend/API; optimized database design and admin back office for efficient operations.</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <section id="certificates" style="padding:18px 0">
-      <div class="card">
-        <h2>Certificates</h2>
+  <section id="skills" style="padding:18px 0">
+    <div class="card reveal">
+      <h2 class="reveal">Skills</h2>
+      <div class="skills-grid reveal">
+          <div class="skill-circle" data-label="Python" data-percent="60"></div>
+          <div class="skill-circle" data-label="PHP" data-percent="70"></div>
+          <div class="skill-circle" data-label="Laravel" data-percent="70"></div>
+          <div class="skill-circle" data-label="JavaScript" data-percent="60"></div>
+        </div><br><br>
+      <div class="two-col stagger">
         <ul>
-          <li><strong>Fundamentals of the C Programming Language I — ThaiMOOC (KMUTT), 2020</strong>. Completed core C concepts: variables, control structures, functions, arrays.</li>
-          <li><strong>Python Qualifying Examination — CIS2023, Kasetsart University (CPSC)</strong>. Passed departmental exam on Python fundamentals.</li>
-          <li><strong>SQL Qualifying Examination — CIS2024, Kasetsart University (CPSC)</strong>. Passed departmental exam on SQL queries & database management.</li>
+          <li><strong>Programming Languages:</strong> JavaScript, Python, PHP, HTML, C</li>
+          <li><strong>Frontend:</strong> CSS, React, Angular, Vue.js</li>
+        </ul>
+        <ul>
+          <li><strong>Backend:</strong> Laravel, Express.js</li>
+          <li><strong>Database & Management:</strong> MySQL, MariaDB</li>
+          <li><strong>Tools:</strong> GitHub, Figma, Trello, Xampp, Wamp</li>
         </ul>
       </div>
-    </section>
-    
-      <section id="contact" style="padding:18px 0 6px ">
-        <div class="card">
-          <h2>Contact</h2><span class="muted">You can contact me via:</span>
-            <div style="margin-top:18px">
-              <div class="contact">
-                <a id="emailLink" href="mailto:aasasdayut.p@ku.th"  >📧 aasasdayut.p@ku.th</a>
-                <a href="tel:096-8656585">📱 096-8656585</a>
-              </div>
-              <p class="muted" style="margin-top:8px">📍 Sakon Nakhon, Thailand</p>
-              
+      <div class="reveal">
+        <h2>Language</h2>
+        <div class="lang-skill">
+          <span>Thai : Native</span>
+            <div class="bar">
+              <div class="fill" style="width: 100%;"></div>
             </div>
         </div>
-      </section>
-    <div class="footer">© <span id="year"></span> Aasasdayut Perdpraw</div>
-    
-  </main>
+        <div class="lang-skill">
+          <span>English : Basic</span>
+            <div class="bar">
+              <div class="fill" style="width: 40%;"></div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience" style="padding:18px 0">
+    <div class="card reveal">
+      <h2 class="reveal">Relevant Experience</h2>
+      <div class="stagger" style="padding:6px 0">
+        <h3>Mini Project: Booth Booking System for Kaset Fair</h3>
+        <ul>
+          <li>Developed a web application for booth booking using Angular as a mini project for final submission.</li>
+          <li>Created an API to fetch data from a MySQL database for real-time booth availability.</li>
+          <li>Worked on both the front-end and back-end to ensure smooth integration between UI and database.</li>
+        </ul>
+      </div>
+      <div style="padding:6px 0">
+        <h3>Thesis Project: Mobile Phone Info Website</h3>
+        <ul>
+          <li>Developed a responsive mobile phone information website using HTML, CSS, JavaScript, React, and Laravel. Implemented search, filtering, and comparison features; 
+            managed news and advertisements; built member and admin systems; and deployed the application on a live server</li>
+        </ul>
+      </div>
+      <div style="padding:6px 0">
+        <h3>Tour Company Management Website Development</h3>
+        <ul>
+          <li>Built a management system (Laravel + MySQL) with separate Frontend/API; optimized database design and admin back office for efficient operations.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="certificates" style="padding:18px 0">
+    <div class="card reveal">
+      <h2 class="reveal">Certificates</h2>
+      <ul class="stagger">
+        <li><strong>Fundamentals of the C Programming Language I — ThaiMOOC (KMUTT), 2020</strong>. Completed core C concepts: variables, control structures, functions, arrays.</li>
+        <li><strong>Python Qualifying Examination — CIS2023, Kasetsart University (CPSC)</strong>. Passed departmental exam on Python fundamentals.</li>
+        <li><strong>SQL Qualifying Examination — CIS2024, Kasetsart University (CPSC)</strong>. Passed departmental exam on SQL queries & database management.</li>
+      </ul>
+    </div>
+  </section>
+  
+    <section id="contact" style="padding:18px 0 6px ">
+      <div class="card reveal">
+        <h2 class="reveal">Contact</h2><span class="muted">You can contact me via:</span>
+          <div style="margin-top:18px" class="reveal">
+            <div class="contact stagger">
+              <a id="emailLink" href="mailto:aasasdayut.p@ku.th"  >📧 aasasdayut.p@ku.th</a>
+              <a href="tel:096-8656585">📱 096-8656585</a>
+            </div>
+            <p class="muted" style="margin-top:8px">📍 Sakon Nakhon, Thailand</p>
+            
+          </div>
+      </div>
+    </section>
+  <div class="footer">© <span id="year"></span> Aasasdayut Perdpraw</div>
+  
+</main>
+
   <button id="scrollTopBtn" title="Go to top">↑</button>
   <script>
     // Highlight nav while scrolling
@@ -401,11 +438,26 @@
           link.rel    = "noopener";
         }
     });
+    // Observ ให้ reveal
+      const animTargets = document.querySelectorAll('.reveal, .stagger');
+      const animObserver = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            if (entry.target.classList.contains('stagger')) {
+              entry.target.classList.add('in-view');
+            } else {
+              entry.target.classList.add('is-visible');
+            }
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15, rootMargin: '0px 0px -5% 0px' });
+
+      animTargets.forEach(el => animObserver.observe(el));
 
   </script>
 
 </body>
 </html>
-
 
 
